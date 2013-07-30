@@ -1,0 +1,283 @@
+%define lookup-function-name lookupGeneratedInit
+%define class-name generated
+%{
+
+#include <string.h>
+#include <v8.h>
+#include "ti.modules.titanium.xml.EntityProxy.h"
+#include "ti.modules.titanium.media.CameraProxy.h"
+#include "ti.modules.titanium.app.AppModule.h"
+#include "org.appcelerator.titanium.TiFileProxy.h"
+#include "ti.modules.titanium.facebook.TiFacebookModuleLoginButtonProxy.h"
+#include "org.appcelerator.titanium.proxy.ActivityProxy.h"
+#include "ti.modules.titanium.codec.CodecModule.h"
+#include "ti.modules.titanium.BufferProxy.h"
+#include "ti.modules.titanium.android.calendar.ReminderProxy.h"
+#include "ti.modules.titanium.analytics.AnalyticsModule.h"
+#include "ti.modules.titanium.contacts.ContactsModule.h"
+#include "ti.modules.titanium.android.EnvironmentModule.h"
+#include "ti.modules.titanium.platform.PlatformModule.h"
+#include "ti.modules.titanium.media.VideoPlayerProxy.h"
+#include "ti.modules.titanium.ui.ScrollViewProxy.h"
+#include "ti.modules.titanium.ui.ButtonProxy.h"
+#include "ti.modules.titanium.filesystem.FilesystemModule.h"
+#include "ti.modules.titanium.stream.FileStreamProxy.h"
+#include "ti.modules.titanium.network.NetworkModule.h"
+#include "ti.modules.titanium.contacts.PersonProxy.h"
+#include "ti.modules.titanium.xml.AttrProxy.h"
+#include "ti.modules.titanium.facebook.FacebookModule.h"
+#include "ti.modules.titanium.ui.PickerRowProxy.h"
+#include "ti.modules.titanium.ui.SearchBarProxy.h"
+#include "ti.modules.titanium.media.MediaModule.h"
+#include "org.appcelerator.titanium.proxy.MenuProxy.h"
+#include "ti.modules.titanium.map.ViewProxy.h"
+#include "ti.modules.titanium.ui.PickerProxy.h"
+#include "ti.modules.titanium.ui.activityindicatorstyle.ActivityIndicatorStyleModule.h"
+#include "ti.modules.titanium.ui.DatePickerProxy.h"
+#include "ti.modules.titanium.platform.DisplayCapsProxy.h"
+#include "ti.modules.titanium.ui.TableViewProxy.h"
+#include "ti.modules.titanium.ui.SearchViewProxy.h"
+#include "ti.modules.titanium.xml.NodeProxy.h"
+#include "ti.modules.titanium.ui.TableViewRowProxy.h"
+#include "org.appcelerator.kroll.KrollModule.h"
+#include "ti.modules.titanium.ui.ViewProxy.h"
+#include "ti.modules.titanium.ui.AlertDialogProxy.h"
+#include "ti.modules.titanium.TitaniumModule.h"
+#include "ti.modules.titanium.android.RemoteViewsProxy.h"
+#include "ti.modules.titanium.xml.CDATASectionProxy.h"
+#include "ti.modules.titanium.ui.WebViewProxy.h"
+#include "ti.modules.titanium.geolocation.GeolocationModule.h"
+#include "ti.modules.titanium.ui.TextFieldProxy.h"
+#include "ti.modules.titanium.ui.ImageViewProxy.h"
+#include "ti.modules.titanium.media.CameraPreviewProxy.h"
+#include "org.appcelerator.titanium.view.TiAnimation.h"
+#include "ti.modules.titanium.utils.UtilsModule.h"
+#include "org.appcelerator.kroll.KrollProxy.h"
+#include "org.appcelerator.titanium.view.Ti2DMatrix.h"
+#include "ti.modules.titanium.ui.TableViewSectionProxy.h"
+#include "ti.modules.titanium.android.PendingIntentProxy.h"
+#include "ti.modules.titanium.platform.AndroidModule.h"
+#include "ti.modules.titanium.xml.XPathNodeListProxy.h"
+#include "ti.modules.titanium.ui._2DMatrixProxy.h"
+#include "ti.modules.titanium.xml.NamedNodeMapProxy.h"
+#include "ti.modules.titanium.geolocation.android.LocationRuleProxy.h"
+#include "ti.modules.titanium.network.HTTPClientProxy.h"
+#include "ti.modules.titanium.map.MapModule.h"
+#include "ti.modules.titanium.ui.clipboard.ClipboardModule.h"
+#include "ti.modules.titanium.database.TiResultSetProxy.h"
+#include "org.appcelerator.titanium.proxy.TiActivityWindowProxy.h"
+#include "ti.modules.titanium.xml.XMLModule.h"
+#include "ti.modules.titanium.stream.StreamModule.h"
+#include "org.appcelerator.titanium.proxy.DecorViewProxy.h"
+#include "ti.modules.titanium.database.TiDatabaseProxy.h"
+#include "ti.modules.titanium.geolocation.android.LocationProviderProxy.h"
+#include "ti.modules.titanium.gesture.GestureModule.h"
+#include "ti.modules.titanium.ui.EmailDialogProxy.h"
+#include "ti.modules.titanium.media.AudioPlayerProxy.h"
+#include "ti.modules.titanium.xml.EntityReferenceProxy.h"
+#include "org.appcelerator.titanium.proxy.TiWindowProxy.h"
+#include "ti.modules.titanium.ui.TiDialogProxy.h"
+#include "org.appcelerator.titanium.TiBlob.h"
+#include "ti.modules.titanium.android.calendar.CalendarProxy.h"
+#include "ti.modules.titanium.database.DatabaseModule.h"
+#include "ti.modules.titanium.xml.CommentProxy.h"
+#include "ti.modules.titanium.ui.android.AndroidModule.h"
+#include "ti.modules.titanium.ui.AnimationProxy.h"
+#include "ti.modules.titanium.xml.NotationProxy.h"
+#include "ti.modules.titanium.android.calendar.EventProxy.h"
+#include "ti.modules.titanium.xml.TextProxy.h"
+#include "org.appcelerator.titanium.proxy.TiViewProxy.h"
+#include "ti.modules.titanium.xml.ElementProxy.h"
+#include "ti.modules.titanium.ui.OptionDialogProxy.h"
+#include "ti.modules.titanium.ui.NotificationProxy.h"
+#include "ti.modules.titanium.ui.TabProxy.h"
+#include "org.appcelerator.titanium.proxy.ServiceProxy.h"
+#include "ti.modules.titanium.xml.ProcessingInstructionProxy.h"
+#include "ti.modules.titanium.xml.NodeListProxy.h"
+#include "org.appcelerator.titanium.proxy.InstrumentationProxy.h"
+#include "ti.modules.titanium.app.properties.PropertiesModule.h"
+#include "ti.modules.titanium.android.AndroidModule.h"
+#include "ti.modules.titanium.ui.UIModule.h"
+#include "ti.modules.titanium.filesystem.FileProxy.h"
+#include "ti.modules.titanium.media.SoundProxy.h"
+#include "org.appcelerator.titanium.proxy.IntentProxy.h"
+#include "ti.modules.titanium.xml.DocumentProxy.h"
+#include "org.appcelerator.titanium.proxy.TiBaseWindowProxy.h"
+#include "ti.modules.titanium.xml.CharacterDataProxy.h"
+#include "ti.modules.titanium.geolocation.android.AndroidModule.h"
+#include "ti.modules.titanium.ui.android.ProgressIndicatorProxy.h"
+#include "ti.modules.titanium.map.AnnotationProxy.h"
+#include "ti.modules.titanium.ui.ActivityWindowProxy.h"
+#include "ti.modules.titanium.ui.ActivityIndicatorProxy.h"
+#include "ti.modules.titanium.ui.ProgressBarProxy.h"
+#include "ti.modules.titanium.ui.PickerColumnProxy.h"
+#include "ti.modules.titanium.stream.BlobStreamProxy.h"
+#include "ti.modules.titanium.xml.DocumentFragmentProxy.h"
+#include "ti.modules.titanium.android.calendar.AlertProxy.h"
+#include "ti.modules.titanium.ui.LabelProxy.h"
+#include "ti.modules.titanium.ui.ScrollableViewProxy.h"
+#include "ti.modules.titanium.ui.TabContentViewProxy.h"
+#include "org.appcelerator.titanium.proxy.RProxy.h"
+#include "org.appcelerator.titanium.proxy.MenuItemProxy.h"
+#include "ti.modules.titanium.media.android.AndroidModule.h"
+#include "ti.modules.titanium.accelerometer.AccelerometerModule.h"
+#include "ti.modules.titanium.ui.TextAreaProxy.h"
+#include "ti.modules.titanium.ui.SliderProxy.h"
+#include "ti.modules.titanium.android.notificationmanager.NotificationProxy.h"
+#include "org.appcelerator.titanium.proxy.ActionBarProxy.h"
+#include "ti.modules.titanium.android.notificationmanager.NotificationManagerModule.h"
+#include "ti.modules.titanium.network.socket.TCPProxy.h"
+#include "ti.modules.titanium.android.calendar.CalendarModule.h"
+#include "ti.modules.titanium.network.socket.SocketModule.h"
+#include "ti.modules.titanium.xml.DOMImplementationProxy.h"
+#include "ti.modules.titanium.ui.ButtonBarProxy.h"
+#include "ti.modules.titanium.locale.LocaleModule.h"
+#include "ti.modules.titanium.ui.SwitchProxy.h"
+#include "ti.modules.titanium.xml.DocumentTypeProxy.h"
+#include "ti.modules.titanium.stream.BufferStreamProxy.h"
+#include "ti.modules.titanium.ui.TabGroupProxy.h"
+#include "ti.modules.titanium.app.AndroidModule.h"
+
+
+namespace titanium {
+namespace bindings {
+
+%}
+struct BindEntry;
+%%
+ti.modules.titanium.xml.EntityProxy, ::titanium::xml::EntityProxy::bindProxy, ::titanium::xml::EntityProxy::dispose
+ti.modules.titanium.media.CameraProxy, ::titanium::media::CameraProxy::bindProxy, ::titanium::media::CameraProxy::dispose
+ti.modules.titanium.app.AppModule, ::titanium::AppModule::bindProxy, ::titanium::AppModule::dispose
+org.appcelerator.titanium.TiFileProxy, ::titanium::TiFileProxy::bindProxy, ::titanium::TiFileProxy::dispose
+ti.modules.titanium.facebook.TiFacebookModuleLoginButtonProxy, ::titanium::facebook::TiFacebookModuleLoginButtonProxy::bindProxy, ::titanium::facebook::TiFacebookModuleLoginButtonProxy::dispose
+org.appcelerator.titanium.proxy.ActivityProxy, ::titanium::ActivityProxy::bindProxy, ::titanium::ActivityProxy::dispose
+ti.modules.titanium.codec.CodecModule, ::titanium::CodecModule::bindProxy, ::titanium::CodecModule::dispose
+ti.modules.titanium.BufferProxy, ::titanium::BufferProxy::bindProxy, ::titanium::BufferProxy::dispose
+ti.modules.titanium.android.calendar.ReminderProxy, ::titanium::android::calendar::ReminderProxy::bindProxy, ::titanium::android::calendar::ReminderProxy::dispose
+ti.modules.titanium.analytics.AnalyticsModule, ::titanium::AnalyticsModule::bindProxy, ::titanium::AnalyticsModule::dispose
+ti.modules.titanium.contacts.ContactsModule, ::titanium::ContactsModule::bindProxy, ::titanium::ContactsModule::dispose
+ti.modules.titanium.android.EnvironmentModule, ::titanium::android::EnvironmentModule::bindProxy, ::titanium::android::EnvironmentModule::dispose
+ti.modules.titanium.platform.PlatformModule, ::titanium::PlatformModule::bindProxy, ::titanium::PlatformModule::dispose
+ti.modules.titanium.media.VideoPlayerProxy, ::titanium::media::VideoPlayerProxy::bindProxy, ::titanium::media::VideoPlayerProxy::dispose
+ti.modules.titanium.ui.ScrollViewProxy, ::titanium::ui::ScrollViewProxy::bindProxy, ::titanium::ui::ScrollViewProxy::dispose
+ti.modules.titanium.ui.ButtonProxy, ::titanium::ui::ButtonProxy::bindProxy, ::titanium::ui::ButtonProxy::dispose
+ti.modules.titanium.filesystem.FilesystemModule, ::titanium::FilesystemModule::bindProxy, ::titanium::FilesystemModule::dispose
+ti.modules.titanium.stream.FileStreamProxy, ::titanium::stream::FileStreamProxy::bindProxy, ::titanium::stream::FileStreamProxy::dispose
+ti.modules.titanium.network.NetworkModule, ::titanium::NetworkModule::bindProxy, ::titanium::NetworkModule::dispose
+ti.modules.titanium.contacts.PersonProxy, ::titanium::contacts::PersonProxy::bindProxy, ::titanium::contacts::PersonProxy::dispose
+ti.modules.titanium.xml.AttrProxy, ::titanium::xml::AttrProxy::bindProxy, ::titanium::xml::AttrProxy::dispose
+ti.modules.titanium.facebook.FacebookModule, ::titanium::FacebookModule::bindProxy, ::titanium::FacebookModule::dispose
+ti.modules.titanium.ui.PickerRowProxy, ::titanium::ui::PickerRowProxy::bindProxy, ::titanium::ui::PickerRowProxy::dispose
+ti.modules.titanium.ui.SearchBarProxy, ::titanium::ui::SearchBarProxy::bindProxy, ::titanium::ui::SearchBarProxy::dispose
+ti.modules.titanium.media.MediaModule, ::titanium::MediaModule::bindProxy, ::titanium::MediaModule::dispose
+org.appcelerator.titanium.proxy.MenuProxy, ::titanium::MenuProxy::bindProxy, ::titanium::MenuProxy::dispose
+ti.modules.titanium.map.ViewProxy, ::titanium::map::ViewProxy::bindProxy, ::titanium::map::ViewProxy::dispose
+ti.modules.titanium.ui.PickerProxy, ::titanium::ui::PickerProxy::bindProxy, ::titanium::ui::PickerProxy::dispose
+ti.modules.titanium.ui.activityindicatorstyle.ActivityIndicatorStyleModule, ::titanium::ui::ActivityIndicatorStyleModule::bindProxy, ::titanium::ui::ActivityIndicatorStyleModule::dispose
+ti.modules.titanium.ui.DatePickerProxy, ::titanium::ui::DatePickerProxy::bindProxy, ::titanium::ui::DatePickerProxy::dispose
+ti.modules.titanium.platform.DisplayCapsProxy, ::titanium::platform::DisplayCapsProxy::bindProxy, ::titanium::platform::DisplayCapsProxy::dispose
+ti.modules.titanium.ui.TableViewProxy, ::titanium::ui::TableViewProxy::bindProxy, ::titanium::ui::TableViewProxy::dispose
+ti.modules.titanium.ui.SearchViewProxy, ::titanium::ui::android::SearchViewProxy::bindProxy, ::titanium::ui::android::SearchViewProxy::dispose
+ti.modules.titanium.xml.NodeProxy, ::titanium::xml::NodeProxy::bindProxy, ::titanium::xml::NodeProxy::dispose
+ti.modules.titanium.ui.TableViewRowProxy, ::titanium::ui::TableViewRowProxy::bindProxy, ::titanium::ui::TableViewRowProxy::dispose
+org.appcelerator.kroll.KrollModule, ::titanium::KrollModule::bindProxy, ::titanium::KrollModule::dispose
+ti.modules.titanium.ui.ViewProxy, ::titanium::ui::ViewProxy::bindProxy, ::titanium::ui::ViewProxy::dispose
+ti.modules.titanium.ui.AlertDialogProxy, ::titanium::ui::AlertDialogProxy::bindProxy, ::titanium::ui::AlertDialogProxy::dispose
+ti.modules.titanium.TitaniumModule, ::titanium::TitaniumModule::bindProxy, ::titanium::TitaniumModule::dispose
+ti.modules.titanium.android.RemoteViewsProxy, ::titanium::android::RemoteViewsProxy::bindProxy, ::titanium::android::RemoteViewsProxy::dispose
+ti.modules.titanium.xml.CDATASectionProxy, ::titanium::xml::CDATASectionProxy::bindProxy, ::titanium::xml::CDATASectionProxy::dispose
+ti.modules.titanium.ui.WebViewProxy, ::titanium::ui::WebViewProxy::bindProxy, ::titanium::ui::WebViewProxy::dispose
+ti.modules.titanium.geolocation.GeolocationModule, ::titanium::GeolocationModule::bindProxy, ::titanium::GeolocationModule::dispose
+ti.modules.titanium.ui.TextFieldProxy, ::titanium::ui::TextFieldProxy::bindProxy, ::titanium::ui::TextFieldProxy::dispose
+ti.modules.titanium.ui.ImageViewProxy, ::titanium::ui::ImageViewProxy::bindProxy, ::titanium::ui::ImageViewProxy::dispose
+ti.modules.titanium.media.CameraPreviewProxy, ::titanium::media::CameraPreviewProxy::bindProxy, ::titanium::media::CameraPreviewProxy::dispose
+org.appcelerator.titanium.view.TiAnimation, ::titanium::TiAnimation::bindProxy, ::titanium::TiAnimation::dispose
+ti.modules.titanium.utils.UtilsModule, ::titanium::UtilsModule::bindProxy, ::titanium::UtilsModule::dispose
+org.appcelerator.kroll.KrollProxy, ::titanium::KrollProxy::bindProxy, ::titanium::KrollProxy::dispose
+org.appcelerator.titanium.view.Ti2DMatrix, ::titanium::Ti2DMatrix::bindProxy, ::titanium::Ti2DMatrix::dispose
+ti.modules.titanium.ui.TableViewSectionProxy, ::titanium::ui::TableViewSectionProxy::bindProxy, ::titanium::ui::TableViewSectionProxy::dispose
+ti.modules.titanium.android.PendingIntentProxy, ::titanium::android::PendingIntentProxy::bindProxy, ::titanium::android::PendingIntentProxy::dispose
+ti.modules.titanium.platform.AndroidModule, ::titanium::platform::AndroidModule::bindProxy, ::titanium::platform::AndroidModule::dispose
+ti.modules.titanium.xml.XPathNodeListProxy, ::titanium::xml::XPathNodeListProxy::bindProxy, ::titanium::xml::XPathNodeListProxy::dispose
+ti.modules.titanium.ui._2DMatrixProxy, ::titanium::ui::_2DMatrixProxy::bindProxy, ::titanium::ui::_2DMatrixProxy::dispose
+ti.modules.titanium.xml.NamedNodeMapProxy, ::titanium::xml::NamedNodeMapProxy::bindProxy, ::titanium::xml::NamedNodeMapProxy::dispose
+ti.modules.titanium.geolocation.android.LocationRuleProxy, ::titanium::LocationRuleProxy::bindProxy, ::titanium::LocationRuleProxy::dispose
+ti.modules.titanium.network.HTTPClientProxy, ::titanium::network::HTTPClientProxy::bindProxy, ::titanium::network::HTTPClientProxy::dispose
+ti.modules.titanium.map.MapModule, ::titanium::MapModule::bindProxy, ::titanium::MapModule::dispose
+ti.modules.titanium.ui.clipboard.ClipboardModule, ::titanium::ui::ClipboardModule::bindProxy, ::titanium::ui::ClipboardModule::dispose
+ti.modules.titanium.database.TiResultSetProxy, ::titanium::database::TiResultSetProxy::bindProxy, ::titanium::database::TiResultSetProxy::dispose
+org.appcelerator.titanium.proxy.TiActivityWindowProxy, ::titanium::android::TiActivityWindowProxy::bindProxy, ::titanium::android::TiActivityWindowProxy::dispose
+ti.modules.titanium.xml.XMLModule, ::titanium::XMLModule::bindProxy, ::titanium::XMLModule::dispose
+ti.modules.titanium.stream.StreamModule, ::titanium::StreamModule::bindProxy, ::titanium::StreamModule::dispose
+org.appcelerator.titanium.proxy.DecorViewProxy, ::titanium::DecorViewProxy::bindProxy, ::titanium::DecorViewProxy::dispose
+ti.modules.titanium.database.TiDatabaseProxy, ::titanium::database::TiDatabaseProxy::bindProxy, ::titanium::database::TiDatabaseProxy::dispose
+ti.modules.titanium.geolocation.android.LocationProviderProxy, ::titanium::LocationProviderProxy::bindProxy, ::titanium::LocationProviderProxy::dispose
+ti.modules.titanium.gesture.GestureModule, ::titanium::GestureModule::bindProxy, ::titanium::GestureModule::dispose
+ti.modules.titanium.ui.EmailDialogProxy, ::titanium::ui::EmailDialogProxy::bindProxy, ::titanium::ui::EmailDialogProxy::dispose
+ti.modules.titanium.media.AudioPlayerProxy, ::titanium::media::AudioPlayerProxy::bindProxy, ::titanium::media::AudioPlayerProxy::dispose
+ti.modules.titanium.xml.EntityReferenceProxy, ::titanium::xml::EntityReferenceProxy::bindProxy, ::titanium::xml::EntityReferenceProxy::dispose
+org.appcelerator.titanium.proxy.TiWindowProxy, ::titanium::TiWindowProxy::bindProxy, ::titanium::TiWindowProxy::dispose
+ti.modules.titanium.ui.TiDialogProxy, ::titanium::ui::TiDialogProxy::bindProxy, ::titanium::ui::TiDialogProxy::dispose
+org.appcelerator.titanium.TiBlob, ::titanium::TiBlob::bindProxy, ::titanium::TiBlob::dispose
+ti.modules.titanium.android.calendar.CalendarProxy, ::titanium::android::calendar::CalendarProxy::bindProxy, ::titanium::android::calendar::CalendarProxy::dispose
+ti.modules.titanium.database.DatabaseModule, ::titanium::DatabaseModule::bindProxy, ::titanium::DatabaseModule::dispose
+ti.modules.titanium.xml.CommentProxy, ::titanium::xml::CommentProxy::bindProxy, ::titanium::xml::CommentProxy::dispose
+ti.modules.titanium.ui.android.AndroidModule, ::titanium::ui::AndroidModule::bindProxy, ::titanium::ui::AndroidModule::dispose
+ti.modules.titanium.ui.AnimationProxy, ::titanium::ui::AnimationProxy::bindProxy, ::titanium::ui::AnimationProxy::dispose
+ti.modules.titanium.xml.NotationProxy, ::titanium::xml::NotationProxy::bindProxy, ::titanium::xml::NotationProxy::dispose
+ti.modules.titanium.android.calendar.EventProxy, ::titanium::android::calendar::EventProxy::bindProxy, ::titanium::android::calendar::EventProxy::dispose
+ti.modules.titanium.xml.TextProxy, ::titanium::xml::TextProxy::bindProxy, ::titanium::xml::TextProxy::dispose
+org.appcelerator.titanium.proxy.TiViewProxy, ::titanium::TiViewProxy::bindProxy, ::titanium::TiViewProxy::dispose
+ti.modules.titanium.xml.ElementProxy, ::titanium::xml::ElementProxy::bindProxy, ::titanium::xml::ElementProxy::dispose
+ti.modules.titanium.ui.OptionDialogProxy, ::titanium::ui::OptionDialogProxy::bindProxy, ::titanium::ui::OptionDialogProxy::dispose
+ti.modules.titanium.ui.NotificationProxy, ::titanium::ui::NotificationProxy::bindProxy, ::titanium::ui::NotificationProxy::dispose
+ti.modules.titanium.ui.TabProxy, ::titanium::ui::TabProxy::bindProxy, ::titanium::ui::TabProxy::dispose
+org.appcelerator.titanium.proxy.ServiceProxy, ::titanium::ServiceProxy::bindProxy, ::titanium::ServiceProxy::dispose
+ti.modules.titanium.xml.ProcessingInstructionProxy, ::titanium::xml::ProcessingInstructionProxy::bindProxy, ::titanium::xml::ProcessingInstructionProxy::dispose
+ti.modules.titanium.xml.NodeListProxy, ::titanium::xml::NodeListProxy::bindProxy, ::titanium::xml::NodeListProxy::dispose
+org.appcelerator.titanium.proxy.InstrumentationProxy, ::titanium::InstrumentationProxy::bindProxy, ::titanium::InstrumentationProxy::dispose
+ti.modules.titanium.app.properties.PropertiesModule, ::titanium::app::PropertiesModule::bindProxy, ::titanium::app::PropertiesModule::dispose
+ti.modules.titanium.android.AndroidModule, ::titanium::AndroidModule::bindProxy, ::titanium::AndroidModule::dispose
+ti.modules.titanium.ui.UIModule, ::titanium::UIModule::bindProxy, ::titanium::UIModule::dispose
+ti.modules.titanium.filesystem.FileProxy, ::titanium::filesystem::FileProxy::bindProxy, ::titanium::filesystem::FileProxy::dispose
+ti.modules.titanium.media.SoundProxy, ::titanium::media::SoundProxy::bindProxy, ::titanium::media::SoundProxy::dispose
+org.appcelerator.titanium.proxy.IntentProxy, ::titanium::IntentProxy::bindProxy, ::titanium::IntentProxy::dispose
+ti.modules.titanium.xml.DocumentProxy, ::titanium::xml::DocumentProxy::bindProxy, ::titanium::xml::DocumentProxy::dispose
+org.appcelerator.titanium.proxy.TiBaseWindowProxy, ::titanium::TiBaseWindowProxy::bindProxy, ::titanium::TiBaseWindowProxy::dispose
+ti.modules.titanium.xml.CharacterDataProxy, ::titanium::xml::CharacterDataProxy::bindProxy, ::titanium::xml::CharacterDataProxy::dispose
+ti.modules.titanium.geolocation.android.AndroidModule, ::titanium::geolocation::AndroidModule::bindProxy, ::titanium::geolocation::AndroidModule::dispose
+ti.modules.titanium.ui.android.ProgressIndicatorProxy, ::titanium::ui::android::ProgressIndicatorProxy::bindProxy, ::titanium::ui::android::ProgressIndicatorProxy::dispose
+ti.modules.titanium.map.AnnotationProxy, ::titanium::map::AnnotationProxy::bindProxy, ::titanium::map::AnnotationProxy::dispose
+ti.modules.titanium.ui.ActivityWindowProxy, ::titanium::ui::ActivityWindowProxy::bindProxy, ::titanium::ui::ActivityWindowProxy::dispose
+ti.modules.titanium.ui.ActivityIndicatorProxy, ::titanium::ui::ActivityIndicatorProxy::bindProxy, ::titanium::ui::ActivityIndicatorProxy::dispose
+ti.modules.titanium.ui.ProgressBarProxy, ::titanium::ui::ProgressBarProxy::bindProxy, ::titanium::ui::ProgressBarProxy::dispose
+ti.modules.titanium.ui.PickerColumnProxy, ::titanium::ui::PickerColumnProxy::bindProxy, ::titanium::ui::PickerColumnProxy::dispose
+ti.modules.titanium.stream.BlobStreamProxy, ::titanium::stream::BlobStreamProxy::bindProxy, ::titanium::stream::BlobStreamProxy::dispose
+ti.modules.titanium.xml.DocumentFragmentProxy, ::titanium::xml::DocumentFragmentProxy::bindProxy, ::titanium::xml::DocumentFragmentProxy::dispose
+ti.modules.titanium.android.calendar.AlertProxy, ::titanium::android::calendar::AlertProxy::bindProxy, ::titanium::android::calendar::AlertProxy::dispose
+ti.modules.titanium.ui.LabelProxy, ::titanium::ui::LabelProxy::bindProxy, ::titanium::ui::LabelProxy::dispose
+ti.modules.titanium.ui.ScrollableViewProxy, ::titanium::ui::ScrollableViewProxy::bindProxy, ::titanium::ui::ScrollableViewProxy::dispose
+ti.modules.titanium.ui.TabContentViewProxy, ::titanium::ui::TabContentViewProxy::bindProxy, ::titanium::ui::TabContentViewProxy::dispose
+org.appcelerator.titanium.proxy.RProxy, ::titanium::RProxy::bindProxy, ::titanium::RProxy::dispose
+org.appcelerator.titanium.proxy.MenuItemProxy, ::titanium::MenuItemProxy::bindProxy, ::titanium::MenuItemProxy::dispose
+ti.modules.titanium.media.android.AndroidModule, ::titanium::media::AndroidModule::bindProxy, ::titanium::media::AndroidModule::dispose
+ti.modules.titanium.accelerometer.AccelerometerModule, ::titanium::AccelerometerModule::bindProxy, ::titanium::AccelerometerModule::dispose
+ti.modules.titanium.ui.TextAreaProxy, ::titanium::ui::TextAreaProxy::bindProxy, ::titanium::ui::TextAreaProxy::dispose
+ti.modules.titanium.ui.SliderProxy, ::titanium::ui::SliderProxy::bindProxy, ::titanium::ui::SliderProxy::dispose
+ti.modules.titanium.android.notificationmanager.NotificationProxy, ::titanium::android::NotificationProxy::bindProxy, ::titanium::android::NotificationProxy::dispose
+org.appcelerator.titanium.proxy.ActionBarProxy, ::titanium::ActionBarProxy::bindProxy, ::titanium::ActionBarProxy::dispose
+ti.modules.titanium.android.notificationmanager.NotificationManagerModule, ::titanium::android::NotificationManagerModule::bindProxy, ::titanium::android::NotificationManagerModule::dispose
+ti.modules.titanium.network.socket.TCPProxy, ::titanium::network::socket::TCPProxy::bindProxy, ::titanium::network::socket::TCPProxy::dispose
+ti.modules.titanium.android.calendar.CalendarModule, ::titanium::android::CalendarModule::bindProxy, ::titanium::android::CalendarModule::dispose
+ti.modules.titanium.network.socket.SocketModule, ::titanium::network::SocketModule::bindProxy, ::titanium::network::SocketModule::dispose
+ti.modules.titanium.xml.DOMImplementationProxy, ::titanium::xml::DOMImplementationProxy::bindProxy, ::titanium::xml::DOMImplementationProxy::dispose
+ti.modules.titanium.ui.ButtonBarProxy, ::titanium::ui::ButtonBarProxy::bindProxy, ::titanium::ui::ButtonBarProxy::dispose
+ti.modules.titanium.locale.LocaleModule, ::titanium::LocaleModule::bindProxy, ::titanium::LocaleModule::dispose
+ti.modules.titanium.ui.SwitchProxy, ::titanium::ui::SwitchProxy::bindProxy, ::titanium::ui::SwitchProxy::dispose
+ti.modules.titanium.xml.DocumentTypeProxy, ::titanium::xml::DocumentTypeProxy::bindProxy, ::titanium::xml::DocumentTypeProxy::dispose
+ti.modules.titanium.stream.BufferStreamProxy, ::titanium::stream::BufferStreamProxy::bindProxy, ::titanium::stream::BufferStreamProxy::dispose
+ti.modules.titanium.ui.TabGroupProxy, ::titanium::ui::TabGroupProxy::bindProxy, ::titanium::ui::TabGroupProxy::dispose
+ti.modules.titanium.app.AndroidModule, ::titanium::app::AndroidModule::bindProxy, ::titanium::app::AndroidModule::dispose
+%%
+} // namespace bindings
+} // namespace titanium
